@@ -1,5 +1,3 @@
-console.log('Hi');
-
 const teams = [
   ['Daniela', 'Gratian', 'Janet', 'Jessica'],
   ['Joachim', 'Joel', 'Kristina', 'Laura'],

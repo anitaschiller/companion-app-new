@@ -1,3 +1,5 @@
+/* RATING KLICKBAR MACHEN: */
+
 const stars = document.querySelectorAll('.star');
 const rectangles = document.querySelectorAll('.rectangle');
 
@@ -48,10 +50,3 @@ const month = today.getMonth() + 1;
 const year = today.getFullYear();
 
 dateElement.innerText = `TODAY, ${day}.${month}.${year}`;
-
-/* TAGEBUCHEINTRAG POSTEN: */
-
-const rating = '';
-const comprehension = '';
-const motto = document.querySelector('#motto').value;
-console.log(motto);
