@@ -1,42 +1,38 @@
-console.log('Hi');
-
-const teams = [
+/* const teams = [
   ['Daniela', 'Gratian', 'Janet', 'Jessica'],
   ['Joachim', 'Joel', 'Kristina', 'Laura'],
   ['Manuel', 'Matthias', 'Moritz', 'Ognjen'],
   ['Philipp', 'Thomas', 'Viktoriia', 'Anita'],
-];
+]; */
+
+const apiUrl = 'https://muc-student-companion-api.vercel.app/api/';
+fetch(apiUrl + 'teams')
+  .then((data) => data.json())
+  .then((teams) => renderTeams(teams));
 
 // Container auf der Team-Page
 const container = document.querySelector('.main-container');
 
-teams.forEach((team, index) => {
-  // Section für jedes Team
-  const teamWrapper = document.createElement('section');
-  container.appendChild(teamWrapper);
+// Container auf der Team-Page
+const container = document.querySelector('.main-container');
 
-  // Headline für jedes Team erzeugen & in die Section einhängen
-  const headline = document.createElement('h3');
-  headline.innerText = `Team ${index + 1}`;
-  teamWrapper.appendChild(headline);
+function renderTeams(teams) {
+  teams.forEach((team, index) => {
+    // Section für jedes Team
+    const teamWrapper = document.createElement('section');
+    container.appendChild(teamWrapper);
 
-  // Für jedes Team Mitglied ein div erstellen, in die Section einhängen und nötige Klassen hinzufügen
-  team.forEach((teamMember) => {
-    const nameBox = document.createElement('div');
-    nameBox.classList.add('team__member');
-    nameBox.innerText = teamMember;
-    teamWrapper.appendChild(nameBox);
+    // Headline für jedes Team erzeugen & in die Section einhängen
+    const headline = document.createElement('h3');
+    headline.innerText = `Team ${index + 1}`;
+    teamWrapper.appendChild(headline);
+
+    // Für jedes Team Mitglied ein div erstellen, in die Section einhängen und nötige Klassen hinzufügen
+    team.forEach((teamMember) => {
+      const nameBox = document.createElement('div');
+      nameBox.classList.add('team__member');
+      nameBox.innerText = teamMember;
+      teamWrapper.appendChild(nameBox);
+    });
   });
-});
-
-let clickedStarIndex;
-
-const stars = document.querySelectorAll('.star');
-console.log(stars);
-
-stars.forEach((star, index) => {
-  star.addEventListener('click', () => {
-    clickedStarIndex = index;
-    console.log(clickedStarIndex);
-  });
-});
+}
