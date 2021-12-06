@@ -13,9 +13,6 @@ fetch(apiUrl + 'teams')
 // Container auf der Team-Page
 const container = document.querySelector('.main-container');
 
-// Container auf der Team-Page
-const container = document.querySelector('.main-container');
-
 function renderTeams(teams) {
   teams.forEach((team, index) => {
     // Section für jedes Team
