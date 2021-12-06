@@ -9,11 +9,10 @@ const buddies = [
   ['Viktoria', 'Anita'],
 ];
 
-console.log(buddies);
-
 const container = document.querySelector('.team-container');
 
 buddies.forEach((buddyPair) => {
+  //Auskommentierter Teil in der buddy.html wird dynamisch für jedes buddyPair nachgebaut
   const buddySection = document.createElement('section');
   container.appendChild(buddySection);
   buddySection.classList.add('team');
