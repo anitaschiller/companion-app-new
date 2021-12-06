@@ -28,15 +28,3 @@ teams.forEach((team, index) => {
     teamWrapper.appendChild(nameBox);
   });
 });
-
-let clickedStarIndex;
-
-const stars = document.querySelectorAll('.star');
-console.log(stars);
-
-stars.forEach((star, index) => {
-  star.addEventListener('click', () => {
-    clickedStarIndex = index;
-    console.log(clickedStarIndex);
-  });
-});
