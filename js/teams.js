@@ -20,9 +20,7 @@ function renderTeams(teams) {
     container.appendChild(teamWrapper);
 
     // Headline für jedes Team erzeugen & in die Section einhängen
-    const headline = document.createElement('h3');
-    headline.innerText = `Team ${index + 1}`;
-    teamWrapper.appendChild(headline);
+    teamWrapper.appendChild(createTeamHeadline(index));
 
     // Für jedes Team Mitglied ein div erstellen, in die Section einhängen und nötige Klassen hinzufügen
     team.forEach((teamMember) => {
@@ -32,4 +30,10 @@ function renderTeams(teams) {
       teamWrapper.appendChild(nameBox);
     });
   });
+}
+
+function createTeamHeadline(teamIndex) {
+  const headline = document.createElement('h3');
+  headline.innerText = `Team ${teamIndex + 1}`;
+  return headline;
 }
