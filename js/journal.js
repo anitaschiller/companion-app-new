@@ -1,52 +1,65 @@
-/* RATING KLICKBAR MACHEN: */
+/* TAGEBUCHEINTRÄGE DYNAMISCH ANZEIGEN LASSEN: */
 
-const stars = document.querySelectorAll('.star');
-const rectangles = document.querySelectorAll('.rectangle');
+fetch('https://muc-student-companion-api.vercel.app/api/journals')
+  .then((response) => response.json())
+  .then((data) => renderDiaryEntries(data));
 
-stars.forEach((star, index, starsList) => {
-  star.addEventListener('click', () => {
-    changeRatingImageSource(
-      index,
-      starsList,
-      '../assets/Star-Copy-7@2x.png',
-      '../assets/Star@2x.png'
-    );
-  });
-});
+const journalEntriesContainer = document.querySelector('.container');
 
-rectangles.forEach((rectangle, index, rectanglesList) => {
-  rectangle.addEventListener('click', () => {
-    changeRatingImageSource(
-      index,
-      rectanglesList,
-      '../assets/Rectangle-Copy-14@2x.png',
-      '../assets/Rectangle@2x.png'
-    );
-  });
-});
+function renderDiaryEntries(diaryEntries) {
+  diaryEntries.forEach((entry) => {
+    const wrappingArticle = document.createElement('article');
+    journalEntriesContainer.appendChild(wrappingArticle);
+    wrappingArticle.classList.add('journal');
 
-function changeRatingImageSource(
-  clickedIndex,
-  elementsList,
-  emptySource,
-  filledSource
-) {
-  elementsList.forEach((element, index) => {
-    // Falls schonmal geklickt und Elemente bereits eingefärbt wurden, werden zuerst alle Sterne zurück auf 'empty' gesetzt
-    element.src = emptySource;
-    // Wenn der Index des geklickten Sterns größer oder gleich ist wie der Index des gerade geprüften Elements aus der forEach-Schleife, soll die Source dieses Elements auf 'fill' gesetzt werden
-    if (clickedIndex >= index) {
-      element.src = filledSource;
-    }
+
+    wrappingArticle.innerHTML = `
+    <p class="sebo-14-dark-up">Date</p>
+    <div class="journal__div stars">
+      <p class="reg">Rating:</p>
+      <div class="comprehension">${renderRatingItems(
+        entry.rating,
+        5,
+        '/assets/Star-Copy-7@2x.png',
+        '/assets/Star@2x.png'
+      )}</div>
+    </div>
+    <div class="journal__div">
+      <p class="reg">Comprehension:</p>
+      <div class="comprehension">${renderRatingItems(
+        entry.comprehension,
+        10,
+        '/assets/Rectangle-Copy-14@2x.png',
+        '/assets/Rectangle@2x.png'
+      )}</div>
+    </div>
+    <div class="journal__div">
+      <p class="reg">Motto:</p>
+      <p class="motto">${entry.motto}</p>
+    </div>
+    <div class="journal_div">
+      <p class="reg">Notes:</p>
+      <p class="notes">${entry.notes}</p>
+    </div>
+    `;
   });
 }
 
-/* DATUM DYNAMISCH EINSETZEN: */
 
-const dateElement = document.querySelector('.date');
-const today = new Date();
-const day = today.getDate();
-const month = today.getMonth() + 1;
-const year = today.getFullYear();
-
-dateElement.innerText = `TODAY, ${day}.${month}.${year}`;
+function renderRatingItems(
+  numberOfColoredItems,
+  numberOfTotalItems,
+  imageSourceEmpty,
+  imageSourceFull
+) {
+  let htmlStringRatingItems = '';
+  for (let i = 0; i < numberOfColoredItems; i++) {
+    htmlStringRatingItems =
+      htmlStringRatingItems + `<img src=${imageSourceFull}>`;
+  }
+  for (let i = numberOfColoredItems; i < numberOfTotalItems; i++) {
+    htmlStringRatingItems =
+      htmlStringRatingItems + `<img src=${imageSourceEmpty}>`;
+  }
+  return htmlStringRatingItems;
+}
